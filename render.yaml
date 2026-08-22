@@ -1,0 +1,28 @@
+databases:
+  - name: baobab-insight-db
+    plan: free
+    databaseName: baobab_insight
+    user: baobab_admin
+
+services:
+  - type: web
+    name: baobab-insight-web
+    runtime: python
+    plan: free
+    buildCommand: "./build.sh"
+    startCommand: "gunicorn config.wsgi:application"
+    envVars:
+      - key: DJANGO_SECRET_KEY
+        generateValue: true
+      - key: DEBUG
+        value: "False"
+      - key: ALLOWED_HOSTS
+        value: ".onrender.com"
+      - key: DATABASE_URL
+        fromDatabase:
+          name: baobab-insight-db
+          property: connectionString
+      - key: WEB_CONCURRENCY
+        value: "4"
+      - key: PYTHON_VERSION
+        value: "3.12.5"

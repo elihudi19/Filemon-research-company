@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block title %}{{ COMPANY_NAME }} — Data-Driven Insights for Multi-Sector Impact{% endblock %}
+
+{% block content %}
+<section class="hero">
+  <div class="container">
+    <h1>Data-Driven Insights for Multi-Sector Impact</h1>
+    <p>{{ COMPANY_NAME }} inatoa utafiti wa hali ya juu katika Afya, Elimu, Uchumi, Kilimo, na Teknolojia
+    kwa taasisi na mashirika Tanzania na kikanda.</p>
+    <a href="{% url 'proposals:contact' %}" class="btn-primary">Request a Proposal</a>
+  </div>
+</section>
+
+<section class="container">
+  <div class="stats-grid">
+    {% for stat in stats %}
+      <div class="stat-box"><span class="num">{{ stat.number }}</span>{{ stat.label_en }}</div>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="container">
+  <h2 class="section-title">Sekta Zetu Kuu</h2>
+  <div class="card-grid">
+    {% for sector in sectors %}
+      <div class="card">
+        <h3>{{ sector.name_en }}</h3>
+        <p>{{ sector.summary_en|truncatewords:20 }}</p>
+        <a href="{{ sector.get_absolute_url }}">Soma Zaidi &rarr;</a>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+
+{% if publications %}
+<section class="container">
+  <h2 class="section-title">Ripoti Mpya</h2>
+  <div class="card-grid">
+    {% for pub in publications %}
+      <div class="card">
+        <h3>{{ pub.title_en }}</h3>
+        <p>{{ pub.summary_en|truncatewords:20 }}</p>
+        <a href="{{ pub.get_absolute_url }}">Pakua Ripoti &rarr;</a>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+
+{% if testimonials %}
+<section class="container">
+  <h2 class="section-title">Wateja Wanasema</h2>
+  <div class="card-grid">
+    {% for t in testimonials %}
+      <div class="card">
+        <p>&ldquo;{{ t.quote_en }}&rdquo;</p>
+        <strong>{{ t.client_name }}</strong> — {{ t.client_organization }}
+      </div>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+{% endblock %}

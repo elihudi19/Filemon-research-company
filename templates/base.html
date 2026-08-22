@@ -1,0 +1,60 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{% block title %}{{ COMPANY_NAME }}{% endblock %}</title>
+<meta name="description" content="{% block description %}{{ COMPANY_NAME }} - Multi-Sector Research Firm{% endblock %}">
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="{% url 'core:home' %}" class="brand">{{ COMPANY_SHORT_NAME }}</a>
+    <nav class="main-nav">
+      <a href="{% url 'core:about' %}">Kuhusu Sisi</a>
+      <a href="{% url 'sectors:list' %}">Sekta</a>
+      <a href="{% url 'services:list' %}">Huduma</a>
+      <a href="{% url 'insights:publication_list' %}">Maktaba</a>
+      <a href="{% url 'proposals:contact' %}" class="btn-cta">Omba Pendekezo</a>
+    </nav>
+  </div>
+</header>
+
+{% if messages %}
+<div class="container">
+  {% for message in messages %}
+    <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+  {% endfor %}
+</div>
+{% endif %}
+
+<main>
+{% block content %}{% endblock %}
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div>
+      <strong>{{ COMPANY_NAME }}</strong>
+      <p>Data-Driven Insights for Multi-Sector Impact.</p>
+    </div>
+    <div>
+      <a href="{% url 'core:methodology' %}">Mbinu za Utafiti</a>
+      <a href="{% url 'core:compliance' %}">Uzingatiaji &amp; Maadili</a>
+      <a href="{% url 'proposals:contact' %}">Mawasiliano</a>
+    </div>
+    <div>
+      <p>Dar es Salaam, Tanzania</p>
+      <p>research@baobabinsight.com</p>
+    </div>
+  </div>
+  <div class="container copyright">
+    &copy; {% now "Y" %} {{ COMPANY_NAME }}. Haki zote zimehifadhiwa.
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,29 @@
+# Siri na mipangilio ya ndani - KAMWE isipande GitHub
+.env
+*.env
+*.pem
+*.key
+
+# Python
+__pycache__/
+*.py[cod]
+*.sqlite3
+db.sqlite3
+
+# Django
+staticfiles/
+media/
+*.log
+
+# Virtual environments
+venv/
+env/
+.venv/
+
+# Editor/OS
+.vscode/
+.idea/
+.DS_Store
+
+# Codespaces
+.devcontainer/*.local.json
