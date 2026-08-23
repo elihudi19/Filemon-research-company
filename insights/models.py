@@ -10,11 +10,7 @@ class Publication(models.Model):
     title_sw = models.CharField(max_length=200)
     summary_en = models.TextField()
     summary_sw = models.TextField()
-    cover_image = models.ImageField(upload_to="articles/", blank=True, null=True)
-    video_url = models.URLField(
-        blank=True,
-        help_text="Bandika link ya YouTube au Vimeo (hiari). Mfano: https://www.youtube.com/watch?v=XXXXXXXXXXX",
-    )
+    cover_image = models.ImageField(upload_to="publications/covers/", blank=True, null=True)
     document = models.FileField(
         upload_to="publications/files/",
         validators=[validate_document_file],
@@ -42,6 +38,10 @@ class Article(models.Model):
     body_en = models.TextField()
     body_sw = models.TextField()
     cover_image = models.ImageField(upload_to="articles/", blank=True, null=True)
+    video_url = models.URLField(
+        blank=True,
+        help_text="Bandika link ya YouTube au Vimeo (hiari). Mfano: https://www.youtube.com/watch?v=XXXXXXXXXXX",
+    )
     author_name = models.CharField(max_length=150)
     published_date = models.DateField()
     is_published = models.BooleanField(default=True)
