@@ -1,62 +1,105 @@
 {% extends "base.html" %}
-{% block title %}{{ COMPANY_NAME }} — RESEARCH COMPANY IN TANZANIA{% endblock %}
+{% load i18n_extras %}
+{% block title %}{{ COMPANY_NAME }} — Data-Driven Insights for Multi-Sector Impact{% endblock %}
 
 {% block content %}
 <section class="hero">
   <div class="container">
-    <h1>REASERCH COMPANY IN TANZANIA</h1>
-    <p>{{ COMPANY_NAME }} inatoa utafiti wa hali ya juu katika Afya, Elimu, Uchumi, Kilimo, na Teknolojia
-    kwa taasisi na mashirika Tanzania na kikanda.</p>
-    <a href="{% url 'proposals:contact' %}" class="btn-primary">Request a Proposal</a>
+    <span class="eyebrow">{% if LANG == 'en' %}Multi-Sector Research Firm{% else %}Kampuni ya Utafiti ya Sekta Mtambuka{% endif %}</span>
+    <h1>Data-Driven Insights for Multi-Sector Impact</h1>
+    <p>
+      {% if LANG == 'en' %}
+        {{ COMPANY_NAME }} delivers rigorous research across Health, Education,
+        Economics, Agriculture, and Technology — helping institutions and
+        organizations across Tanzania and the region make evidence-based decisions.
+      {% else %}
+        {{ COMPANY_NAME }} inatoa utafiti wa hali ya juu katika Afya, Elimu, Uchumi,
+        Kilimo, na Teknolojia — kuwasaidia taasisi na mashirika Tanzania na kikanda
+        kufanya maamuzi yanayoegemea data.
+      {% endif %}
+    </p>
+    <div class="hero-actions">
+      <a href="{% url 'proposals:contact' %}" class="btn-primary">
+        {% if LANG == 'en' %}Request a Proposal{% else %}Omba Pendekezo{% endif %}
+      </a>
+      <a href="{% url 'core:methodology' %}" class="link-secondary">
+        {% if LANG == 'en' %}Our Methodology &rarr;{% else %}Mbinu Zetu &rarr;{% endif %}
+      </a>
+    </div>
   </div>
 </section>
 
-<section class="container">
-  <div class="stats-grid">
+{% if stats %}
+<section class="credibility-strip">
+  <div class="container">
     {% for stat in stats %}
-      <div class="stat-box"><span class="num">{{ stat.number }}</span>{{ stat.label_en }}</div>
-    {% endfor %}
-  </div>
-</section>
-
-<section class="container">
-  <h2 class="section-title">Sekta Zetu Kuu</h2>
-  <div class="card-grid">
-    {% for sector in sectors %}
-      <div class="card">
-        <h3>{{ sector.name_en }}</h3>
-        <p>{{ sector.summary_en|truncatewords:20 }}</p>
-        <a href="{{ sector.get_absolute_url }}">Soma Zaidi &rarr;</a>
-      </div>
-    {% endfor %}
-  </div>
-</section>
-
-{% if publications %}
-<section class="container">
-  <h2 class="section-title">Ripoti Mpya</h2>
-  <div class="card-grid">
-    {% for pub in publications %}
-      <div class="card">
-        <h3>{{ pub.title_en }}</h3>
-        <p>{{ pub.summary_en|truncatewords:20 }}</p>
-        <a href="{{ pub.get_absolute_url }}">Pakua Ripoti &rarr;</a>
+      <div class="stat-item">
+        <span class="num">{{ stat.number }}</span>
+        <span class="label">{% lfield stat "label" %}</span>
       </div>
     {% endfor %}
   </div>
 </section>
 {% endif %}
 
+<section class="block">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">{% if LANG == 'en' %}What We Cover{% else %}Tunachofanyia Kazi{% endif %}</span>
+      <h2>{% if LANG == 'en' %}Our Core Sectors{% else %}Sekta Zetu Kuu{% endif %}</h2>
+    </div>
+    <div class="card-grid">
+      {% for sector in sectors %}
+        <div class="card">
+          <h3>{% lfield sector "name" %}</h3>
+          <p>{% lfield sector "summary" %}</p>
+          <a href="{{ sector.get_absolute_url }}">
+            {% if LANG == 'en' %}Read More &rarr;{% else %}Soma Zaidi &rarr;{% endif %}
+          </a>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% if publications %}
+<section class="block section-alt">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">{% if LANG == 'en' %}Latest Thinking{% else %}Ripoti Mpya{% endif %}</span>
+      <h2>{% if LANG == 'en' %}Research Reports{% else %}Ripoti za Utafiti{% endif %}</h2>
+    </div>
+    <div class="card-grid">
+      {% for pub in publications %}
+        <div class="card">
+          <h3>{% lfield pub "title" %}</h3>
+          <p>{% lfield pub "summary" %}</p>
+          <a href="{{ pub.get_absolute_url }}">
+            {% if LANG == 'en' %}Download Report &rarr;{% else %}Pakua Ripoti &rarr;{% endif %}
+          </a>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
 {% if testimonials %}
-<section class="container">
-  <h2 class="section-title">Wateja Wanasema</h2>
-  <div class="card-grid">
-    {% for t in testimonials %}
-      <div class="card">
-        <p>&ldquo;{{ t.quote_en }}&rdquo;</p>
-        <strong>{{ t.client_name }}</strong> — {{ t.client_organization }}
-      </div>
-    {% endfor %}
+<section class="block">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">{% if LANG == 'en' %}Client Voices{% else %}Sauti za Wateja{% endif %}</span>
+      <h2>{% if LANG == 'en' %}What Clients Say{% else %}Wateja Wanasema{% endif %}</h2>
+    </div>
+    <div class="card-grid">
+      {% for t in testimonials %}
+        <div class="card">
+          <p style="color:var(--ink); font-style:italic;">&ldquo;{% lfield t "quote" %}&rdquo;</p>
+          <strong style="color:var(--navy);">{{ t.client_name }}</strong>
+          <p style="margin-top:2px; font-size:0.85rem;">{{ t.client_organization }}</p>
+        </div>
+      {% endfor %}
+    </div>
   </div>
 </section>
 {% endif %}
