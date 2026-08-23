@@ -1,30 +1,36 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="sw">
+<html lang="{{ LANG|default:'en' }}">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{% block title %}{{ COMPANY_NAME }}{% endblock %}</title>
-<meta name="description" content="{% block description %}{{ COMPANY_NAME }} - Multi-Sector Research Firm{% endblock %}">
+<meta name="description" content="{% block description %}{{ COMPANY_NAME }} — Multi-Sector Research Firm{% endblock %}">
 <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
 
 <header class="site-header">
   <div class="container header-inner">
-    <a href="{% url 'core:home' %}" class="brand">{{ COMPANY_SHORT_NAME }}</a>
+    <a href="{% url 'core:home' %}" class="brand">
+      <span class="brand-mark">B</span>
+      {{ COMPANY_SHORT_NAME }}
+    </a>
     <nav class="main-nav">
-      <a href="{% url 'core:about' %}">Kuhusu Sisi</a>
-      <a href="{% url 'sectors:list' %}">Sekta</a>
-      <a href="{% url 'services:list' %}">Huduma</a>
-      <a href="{% url 'insights:publication_list' %}">Maktaba</a>
-      <a href="{% url 'proposals:contact' %}" class="btn-cta">Omba Pendekezo</a>
+      <a href="{% url 'core:about' %}">{% if LANG == 'en' %}About{% else %}Kuhusu Sisi{% endif %}</a>
+      <a href="{% url 'sectors:list' %}">{% if LANG == 'en' %}Sectors{% else %}Sekta{% endif %}</a>
+      <a href="{% url 'services:list' %}">{% if LANG == 'en' %}Services{% else %}Huduma{% endif %}</a>
+      <a href="{% url 'insights:publication_list' %}">{% if LANG == 'en' %}Insights{% else %}Maktaba{% endif %}</a>
+      <span class="lang-switch">
+        <a href="?lang=en" class="{% if LANG == 'en' %}lang-active{% endif %}">EN</a>/<a href="?lang=sw" class="{% if LANG == 'sw' %}lang-active{% endif %}">SW</a>
+      </span>
+      <a href="{% url 'proposals:contact' %}" class="btn-cta">{% if LANG == 'en' %}Request a Proposal{% else %}Omba Pendekezo{% endif %}</a>
     </nav>
   </div>
 </header>
 
 {% if messages %}
-<div class="container">
+<div class="container" style="padding-top:20px;">
   {% for message in messages %}
     <div class="alert alert-{{ message.tags }}">{{ message }}</div>
   {% endfor %}
@@ -40,19 +46,22 @@
     <div>
       <strong>{{ COMPANY_NAME }}</strong>
       <p>Data-Driven Insights for Multi-Sector Impact.</p>
-    </div>
-    <div>
-      <a href="{% url 'core:methodology' %}">Mbinu za Utafiti</a>
-      <a href="{% url 'core:compliance' %}">Uzingatiaji &amp; Maadili</a>
-      <a href="{% url 'proposals:contact' %}">Mawasiliano</a>
-    </div>
-    <div>
       <p>Dar es Salaam, Tanzania</p>
-      <p>research@baobabinsight.com</p>
+    </div>
+    <div>
+      <span class="footer-col-title">{% if LANG == 'en' %}Company{% else %}Kampuni{% endif %}</span>
+      <a href="{% url 'core:about' %}">{% if LANG == 'en' %}About Us{% else %}Kuhusu Sisi{% endif %}</a>
+      <a href="{% url 'core:methodology' %}">{% if LANG == 'en' %}Methodology{% else %}Mbinu za Utafiti{% endif %}</a>
+      <a href="{% url 'core:compliance' %}">{% if LANG == 'en' %}Compliance & Ethics{% else %}Uzingatiaji &amp; Maadili{% endif %}</a>
+    </div>
+    <div>
+      <span class="footer-col-title">{% if LANG == 'en' %}Connect{% else %}Wasiliana{% endif %}</span>
+      <a href="{% url 'proposals:contact' %}">{% if LANG == 'en' %}Request a Proposal{% else %}Omba Pendekezo{% endif %}</a>
+      <a href="mailto:research@baobabinsight.com">research@baobabinsight.com</a>
     </div>
   </div>
   <div class="container copyright">
-    &copy; {% now "Y" %} {{ COMPANY_NAME }}. Haki zote zimehifadhiwa.
+    &copy; {% now "Y" %} {{ COMPANY_NAME }}. {% if LANG == 'en' %}All rights reserved.{% else %}Haki zote zimehifadhiwa.{% endif %}
   </div>
 </footer>
 
