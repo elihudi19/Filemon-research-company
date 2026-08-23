@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load i18n_extras %}
+{% block title %}{% if LANG == 'en' %}Careers{% else %}Ajira{% endif %} — {{ COMPANY_NAME }}{% endblock %}
+{% block content %}
+<section class="block">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">{% if LANG == 'en' %}Join Our Team{% else %}Jiunge Nasi{% endif %}</span>
+      <h2>{% if LANG == 'en' %}Open Positions{% else %}Nafasi za Kazi{% endif %}</h2>
+    </div>
+    <div class="card-grid">
+      {% for job in jobs %}
+        <div class="card">
+          <h3>{% lfield job "title" %}</h3>
+          <p>{{ job.get_employment_type_display }} — {{ job.location }}</p>
+          <a href="{{ job.get_absolute_url }}">
+            {% if LANG == 'en' %}View Details &rarr;{% else %}Angalia Zaidi &rarr;{% endif %}
+          </a>
+        </div>
+      {% empty %}
+        <p>{% if LANG == 'en' %}No open positions at the moment. Please check back soon.{% else %}Hakuna nafasi za kazi kwa sasa. Tafadhali rudi tena hivi karibuni.{% endif %}</p>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}
