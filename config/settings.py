@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     "services",
     "insights",
     "proposals",
+    "careers",
 ]
 
 MIDDLEWARE = [
