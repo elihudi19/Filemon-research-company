@@ -10,3 +10,6 @@ class ProposalRequestAdmin(admin.ModelAdmin):
     search_fields = ("full_name", "organization", "email")
     readonly_fields = ("submitted_ip", "created_at")
     date_hierarchy = "created_at"
+
+    def has_delete_permission(self, request, obj=None):
+        return request.user.is_superuser
