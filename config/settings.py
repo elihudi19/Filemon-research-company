@@ -182,21 +182,18 @@ SESSION_COOKIE_SAMESITE = "Lax"
 CSRF_COOKIE_SAMESITE = "Lax"
 
 # ---------------------------------------------------------------------------
-# CONTENT SECURITY POLICY (django-csp) — kuzuia XSS na content injection
+# CONTENT SECURITY POLICY (django-csp 3.8) — kuzuia XSS na content injection
 # ---------------------------------------------------------------------------
-CONTENT_SECURITY_POLICY = {
-    "DIRECTIVES": {
-        "default-src": ("'self'",),
-        "script-src": ("'self'", "https://cdn.jsdelivr.net"),
-        "style-src": ("'self'", "'unsafe-inline'", "https://fonts.googleapis.com"),
-        "font-src": ("'self'", "https://fonts.gstatic.com"),
-        "img-src": ("'self'", "data:", "https:"),
-        "object-src": ("'none'",),
-        "frame-ancestors": ("'none'",),
-        "base-uri": ("'self'",),
-        "form-action": ("'self'",),
-    }
-}
+CSP_DEFAULT_SRC = ["'self'"]
+CSP_SCRIPT_SRC = ["'self'", "https://cdn.jsdelivr.net"]
+CSP_STYLE_SRC = ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"]
+CSP_FONT_SRC = ["'self'", "https://fonts.gstatic.com"]
+CSP_IMG_SRC = ["'self'", "data:", "https:"]
+CSP_FRAME_SRC = ["https://www.youtube.com", "https://player.vimeo.com"]
+CSP_OBJECT_SRC = ["'none'"]
+CSP_FRAME_ANCESTORS = ["'none'"]
+CSP_BASE_URI = ["'self'"]
+CSP_FORM_ACTION = ["'self'"]
 
 # ---------------------------------------------------------------------------
 # UPLOAD LIMITS — kuzuia faili hatarishi (RFP/ToR documents)
