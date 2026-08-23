@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load i18n_extras %}
+{% block title %}{% lfield job "title" %} — {{ COMPANY_NAME }}{% endblock %}
+{% block content %}
+<section class="block">
+  <div class="container">
+    <span class="eyebrow">{{ job.get_employment_type_display }} — {{ job.location }}</span>
+    <h2>{% lfield job "title" %}</h2>
+    <p>{% lfield job "description" %}</p>
+
+    {% if job.requirements_en or job.requirements_sw %}
+      <h3>{% if LANG == 'en' %}Requirements{% else %}Mahitaji{% endif %}</h3>
+      <p>{% lfield job "requirements" %}</p>
+    {% endif %}
+
+    {% if job.application_deadline %}
+      <p><strong>{% if LANG == 'en' %}Deadline:{% else %}Mwisho wa Kutuma Maombi:{% endif %}</strong> {{ job.application_deadline }}</p>
+    {% endif %}
+
+    <a href="{% url 'careers:apply' job.slug %}" class="btn-primary">
+      {% if LANG == 'en' %}Apply Now{% else %}Omba Sasa{% endif %}
+    </a>
+  </div>
+</section>
+{% endblock %}
