@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}{% if LANG == 'en' %}Thank You{% else %}Asante{% endif %} — {{ COMPANY_NAME }}{% endblock %}
+{% block content %}
+<section class="block">
+  <div class="container">
+    <h2>{% if LANG == 'en' %}Thank You!{% else %}Asante!{% endif %}</h2>
+    <p>{% if LANG == 'en' %}Your application has been received. Our team will contact you if shortlisted.{% else %}Ombi lako la kazi limepokelewa. Timu yetu itawasiliana nawe ikiwa utachaguliwa.{% endif %}</p>
+    <a href="{% url 'careers:job_list' %}" class="btn-primary">{% if LANG == 'en' %}View Other Positions{% else %}Angalia Nafasi Nyingine{% endif %}</a>
+  </div>
+</section>
+{% endblock %}
