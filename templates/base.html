@@ -21,6 +21,7 @@
       <a href="{% url 'sectors:list' %}">{% if LANG == 'en' %}Sectors{% else %}Sekta{% endif %}</a>
       <a href="{% url 'services:list' %}">{% if LANG == 'en' %}Services{% else %}Huduma{% endif %}</a>
       <a href="{% url 'insights:publication_list' %}">{% if LANG == 'en' %}Insights{% else %}Maktaba{% endif %}</a>
+      <a href="{% url 'careers:job_list' %}">{% if LANG == 'en' %}Careers{% else %}Ajira{% endif %}</a>
       <span class="lang-switch">
         <a href="?lang=en" class="{% if LANG == 'en' %}lang-active{% endif %}">EN</a>/<a href="?lang=sw" class="{% if LANG == 'sw' %}lang-active{% endif %}">SW</a>
       </span>
@@ -51,19 +52,3 @@
     <div>
       <span class="footer-col-title">{% if LANG == 'en' %}Company{% else %}Kampuni{% endif %}</span>
       <a href="{% url 'core:about' %}">{% if LANG == 'en' %}About Us{% else %}Kuhusu Sisi{% endif %}</a>
-      <a href="{% url 'core:methodology' %}">{% if LANG == 'en' %}Methodology{% else %}Mbinu za Utafiti{% endif %}</a>
-      <a href="{% url 'core:compliance' %}">{% if LANG == 'en' %}Compliance & Ethics{% else %}Uzingatiaji &amp; Maadili{% endif %}</a>
-    </div>
-    <div>
-      <span class="footer-col-title">{% if LANG == 'en' %}Connect{% else %}Wasiliana{% endif %}</span>
-      <a href="{% url 'proposals:contact' %}">{% if LANG == 'en' %}Request a Proposal{% else %}Omba Pendekezo{% endif %}</a>
-      <a href="mailto:research@baobabinsight.com">research@baobabinsight.com</a>
-    </div>
-  </div>
-  <div class="container copyright">
-    &copy; {% now "Y" %} {{ COMPANY_NAME }}. {% if LANG == 'en' %}All rights reserved.{% else %}Haki zote zimehifadhiwa.{% endif %}
-  </div>
-</footer>
-
-</body>
-</html>
