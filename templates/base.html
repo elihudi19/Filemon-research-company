@@ -16,6 +16,10 @@
       <span class="brand-mark">B</span>
       {{ COMPANY_SHORT_NAME }}
     </a>
+
+    <input type="checkbox" id="nav-toggle" class="nav-toggle-checkbox">
+    <label for="nav-toggle" class="nav-toggle-btn">&#9776;</label>
+
     <nav class="main-nav">
       <a href="{% url 'core:about' %}">{% if LANG == 'en' %}About{% else %}Kuhusu Sisi{% endif %}</a>
       <a href="{% url 'sectors:list' %}">{% if LANG == 'en' %}Sectors{% else %}Sekta{% endif %}</a>
@@ -52,3 +56,20 @@
     <div>
       <span class="footer-col-title">{% if LANG == 'en' %}Company{% else %}Kampuni{% endif %}</span>
       <a href="{% url 'core:about' %}">{% if LANG == 'en' %}About Us{% else %}Kuhusu Sisi{% endif %}</a>
+      <a href="{% url 'core:methodology' %}">{% if LANG == 'en' %}Methodology{% else %}Mbinu za Utafiti{% endif %}</a>
+      <a href="{% url 'core:compliance' %}">{% if LANG == 'en' %}Compliance & Ethics{% else %}Uzingatiaji &amp; Maadili{% endif %}</a>
+      <a href="{% url 'careers:job_list' %}">{% if LANG == 'en' %}Careers{% else %}Ajira{% endif %}</a>
+    </div>
+    <div>
+      <span class="footer-col-title">{% if LANG == 'en' %}Connect{% else %}Wasiliana{% endif %}</span>
+      <a href="{% url 'proposals:contact' %}">{% if LANG == 'en' %}Request a Proposal{% else %}Omba Pendekezo{% endif %}</a>
+      <a href="mailto:research@baobabinsight.com">research@baobabinsight.com</a>
+    </div>
+  </div>
+  <div class="container copyright">
+    &copy; {% now "Y" %} {{ COMPANY_NAME }}. {% if LANG == 'en' %}All rights reserved.{% else %}Haki zote zimehifadhiwa.{% endif %}
+  </div>
+</footer>
+
+</body>
+</html>
