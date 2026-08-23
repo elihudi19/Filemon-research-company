@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% load honeypot i18n_extras %}
+{% block title %}{% if LANG == 'en' %}Apply{% else %}Omba{% endif %} — {% lfield job "title" %}{% endblock %}
+{% block content %}
+<section class="block">
+  <div class="container">
+    <span class="eyebrow">{% lfield job "title" %}</span>
+    <h2>{% if LANG == 'en' %}Apply for this Position{% else %}Omba Nafasi Hii{% endif %}</h2>
+
+    <form method="post" enctype="multipart/form-data" novalidate>
+      {% csrf_token %}
+      {% render_honeypot_field %}
+      {{ form.non_field_errors }}
+
+      <p>
+        <label for="{{ form.full_name.id_for_label }}">{% if LANG == 'en' %}Full Name{% else %}Jina Kamili{% endif %}</label>
+        {{ form.full_name }}
+        {{ form.full_name.errors }}
+      </p>
+      <p>
+        <label for="{{ form.email.id_for_label }}">{% if LANG == 'en' %}Email{% else %}Barua Pepe{% endif %}</label>
+        {{ form.email }}
+        {{ form.email.errors }}
+      </p>
+      <p>
+        <label for="{{ form.phone.id_for_label }}">{% if LANG == 'en' %}Phone (Optional){% else %}Simu (Hiari){% endif %}</label>
+        {{ form.phone }}
+      </p>
+      <p>
+        <label for="{{ form.cover_message.id_for_label }}">{% if LANG == 'en' %}Why are you a good fit?{% else %}Kwa Nini Unafaa Nafasi Hii?{% endif %}</label>
+        {{ form.cover_message }}
+        {{ form.cover_message.errors }}
+      </p>
+      <p>
+        <label for="{{ form.resume.id_for_label }}">{% if LANG == 'en' %}CV / Resume (PDF/DOC, max 5MB){% else %}CV (PDF/DOC, upeo 5MB){% endif %}</label>
+        {{ form.resume }}
+        {{ form.resume.errors }}
+      </p>
+
+      <button type="submit">{% if LANG == 'en' %}Submit Application{% else %}Tuma Ombi{% endif %}</button>
+    </form>
+  </div>
+</section>
+{% endblock %}
