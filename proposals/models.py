@@ -17,7 +17,7 @@ class ProposalRequest(models.Model):
     full_name = models.CharField(max_length=150)
     organization = models.CharField(max_length=200)
     email = models.EmailField()
-    phone = models.CharField(max_length=30, blank=True)
+    phone = models.CharField(max_length=30)
     sector = models.ForeignKey(Sector, on_delete=models.SET_NULL, null=True, blank=True)
     message = models.TextField()
     tor_document = models.FileField(
