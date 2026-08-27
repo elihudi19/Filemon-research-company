@@ -24,17 +24,20 @@ def get_client_ip(request):
 @ratelimit(key="ip", rate="5/h", method="POST", block=False)
 def contact_request(request):
     was_limited = getattr(request, "limited", False)
+    lang = getattr(request, "LANG", "en")
 
     if request.method == "POST" and was_limited:
         logger.warning("Rate limit imefikiwa kwa IP %s kwenye fomu ya RFP.", get_client_ip(request))
-        messages.error(
-            request,
-            "Umetuma maombi mengi kwa muda mfupi. Tafadhali subiri kidogo kisha ujaribu tena.",
+        error_msg = (
+            "You have submitted too many requests recently. Please wait a moment and try again."
+            if lang == "en"
+            else "Umetuma maombi mengi kwa muda mfupi. Tafadhali subiri kidogo kisha ujaribu tena."
         )
-        return render(request, "proposals/contact.html", {"form": ProposalRequestForm()})
+        messages.error(request, error_msg)
+        return render(request, "proposals/contact.html", {"form": ProposalRequestForm(lang=lang)})
 
     if request.method == "POST":
-        form = ProposalRequestForm(request.POST, request.FILES)
+        form = ProposalRequestForm(request.POST, request.FILES, lang=lang)
         if form.is_valid():
             proposal = form.save(commit=False)
             proposal.submitted_ip = get_client_ip(request)
@@ -57,13 +60,15 @@ def contact_request(request):
             except Exception:
                 logger.exception("Imeshindwa kutuma barua pepe ya taarifa ya RFP.")
 
-            messages.success(
-                request,
-                "Asante! Ombi lako limepokelewa. Timu yetu itawasiliana nawe hivi karibuni.",
+            success_msg = (
+                "Thank you! Your request has been received. Our team will contact you shortly."
+                if lang == "en"
+                else "Asante! Ombi lako limepokelewa. Timu yetu itawasiliana nawe hivi karibuni."
             )
+            messages.success(request, success_msg)
             return redirect("proposals:thank_you")
     else:
-        form = ProposalRequestForm()
+        form = ProposalRequestForm(lang=lang)
 
     return render(request, "proposals/contact.html", {"form": form})
 
