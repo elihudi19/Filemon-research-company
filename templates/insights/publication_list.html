@@ -1,16 +1,26 @@
 {% extends "base.html" %}
-{% block title %}Ripoti na Whitepapers — {{ COMPANY_NAME }}{% endblock %}
+{% load i18n_extras %}
+{% block title %}{% if LANG == 'en' %}Reports &amp; Whitepapers{% else %}Ripoti na Whitepapers{% endif %} — {{ COMPANY_NAME }}{% endblock %}
 {% block content %}
-<section class="container">
-  <h2 class="section-title">Research Reports &amp; Whitepapers</h2>
-  <div class="card-grid">
-    {% for pub in publications %}
-      <div class="card">
-        <h3>{{ pub.title_en }}</h3>
-        <p>{{ pub.summary_en|truncatewords:20 }}</p>
-        <a href="{{ pub.get_absolute_url }}">Angalia &amp; Pakua &rarr;</a>
-      </div>
-    {% empty %}<p>Hakuna ripoti bado.</p>{% endfor %}
+<section class="block">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">{% if LANG == 'en' %}Our Publications{% else %}Machapisho Yetu{% endif %}</span>
+      <h2>{% if LANG == 'en' %}Research Reports &amp; Whitepapers{% else %}Ripoti za Utafiti na Whitepapers{% endif %}</h2>
+    </div>
+    <div class="card-grid">
+      {% for pub in publications %}
+        <div class="card">
+          <h3>{% lfield pub "title" %}</h3>
+          <p>{% lfield pub "summary" as summary_text %}{{ summary_text|truncatewords:20 }}</p>
+          <a href="{{ pub.get_absolute_url }}">
+            {% if LANG == 'en' %}View &amp; Download &rarr;{% else %}Angalia &amp; Pakua &rarr;{% endif %}
+          </a>
+        </div>
+      {% empty %}
+        <p>{% if LANG == 'en' %}No reports yet.{% else %}Hakuna ripoti bado.{% endif %}</p>
+      {% endfor %}
+    </div>
   </div>
 </section>
 {% endblock %}
