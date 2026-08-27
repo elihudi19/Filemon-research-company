@@ -34,7 +34,7 @@
       <a href="{% url 'services:list' %}">{% if LANG == 'en' %}Services{% else %}Huduma{% endif %}</a>
       <a href="{% url 'insights:publication_list' %}">{% if LANG == 'en' %}Insights{% else %}Maktaba{% endif %}</a>
       <a href="{% url 'careers:job_list' %}">{% if LANG == 'en' %}Careers{% else %}Ajira{% endif %}</a>
-      <a href="{% url 'proposals:contact' %}" class="btn-cta">{% if LANG == 'en' %}Request a Proposal{% else %}Omba Pendekezo{% endif %}</a>
+      <a href="{% url 'proposals:contact' %}" class="btn-cta">{% if LANG == 'en' %}Request a Service{% else %}Omba Huduma{% endif %}</a>
     </nav>
   </div>
 </header>
@@ -67,7 +67,7 @@
     </div>
     <div>
       <span class="footer-col-title">{% if LANG == 'en' %}Connect{% else %}Wasiliana{% endif %}</span>
-      <a href="{% url 'proposals:contact' %}">{% if LANG == 'en' %}Request a Proposal{% else %}Omba Pendekezo{% endif %}</a>
+      <a href="{% url 'proposals:contact' %}">{% if LANG == 'en' %}Request a Service{% else %}Omba Huduma{% endif %}</a>
       <a href="mailto:info@rctisolution.com">info@rctisolution.com</a>
     </div>
   </div>
