@@ -6,7 +6,7 @@
   <div class="container">
     <span class="eyebrow">{% if LANG == 'en' %}Get Started{% else %}Anza Sasa{% endif %}</span>
     <h2>{% if LANG == 'en' %}Request for Proposal (RFP){% else %}Omba Pendekezo (RFP){% endif %}</h2>
-    <p>{% if LANG == 'en' %}Fill out the form below and our team will contact you within 2 business days.{% else %}Jaza fomu hapa chini na timu yetu itawasiliana nawe ndani ya siku 2 za kazi.{% endif %}</p>
+    <p>{% if LANG == 'en' %}Fill out the form below and our team will contact you today.{% else %}Jaza fomu hapa chini na timu yetu itawasiliana nawe leo.{% endif %}</p>
 
     <form method="post" enctype="multipart/form-data" novalidate>
       {% csrf_token %}
