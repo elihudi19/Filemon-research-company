@@ -1,15 +1,35 @@
 {% extends "base.html" %}
-{% block title %}Huduma Zetu — {{ COMPANY_NAME }}{% endblock %}
+{% load i18n_extras %}
+{% block title %}{% if LANG == 'en' %}Services{% else %}Huduma{% endif %} — {{ COMPANY_NAME }}{% endblock %}
 {% block content %}
-<section class="container">
-  <h2 class="section-title">Huduma Tunazotoa</h2>
-  <div class="card-grid">
-    {% for service in services %}
-      <div class="card">
-        <h3>{{ service.title_en }}</h3>
-        <p>{{ service.description_en }}</p>
-      </div>
-    {% endfor %}
+<section class="block">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">{% if LANG == 'en' %}End-to-End Research &amp; Technology Solutions{% else %}Huduma Jumuishi za Kitafiti na Kiteknolojia{% endif %}</span>
+      <h2>{% if LANG == 'en' %}Our Services{% else %}Huduma Tunazotoa{% endif %}</h2>
+      <p style="max-width:720px;">
+        {% if LANG == 'en' %}
+          We provide end-to-end research and technology solutions designed to
+          help organizations, companies, and institutions make sound,
+          data-driven decisions while streamlining their day-to-day operations.
+        {% else %}
+          Tunatoa huduma jumuishi za kitafiti na kiteknolojia zilizoundwa
+          kusaidia mashirika, makampuni, na taasisi kufanya maamuzi sahihi
+          yanayotokana na data pamoja na kurahisisha uendeshaji wa shughuli
+          zao za kila siku.
+        {% endif %}
+      </p>
+    </div>
+    <div class="card-grid">
+      {% for service in services %}
+        <div class="card">
+          <h3>{% lfield service "title" %}</h3>
+          <div>{% lfield service "description" as service_desc %}{{ service_desc|linebreaks }}</div>
+        </div>
+      {% empty %}
+        <p>{% if LANG == 'en' %}No services have been added yet.{% else %}Hakuna huduma iliyoongezwa bado.{% endif %}</p>
+      {% endfor %}
+    </div>
   </div>
 </section>
 {% endblock %}
