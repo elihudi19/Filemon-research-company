@@ -108,13 +108,21 @@ a { color: inherit; }
   transition: background 0.2s ease;
 }
 .btn-cta:hover { background: var(--navy-deep); }
-.lang-switch { display: flex; gap: 2px; font-size: 0.78rem; }
+.lang-switch { display: flex; gap: 4px; font-size: 0.78rem; align-items: center; }
 .lang-switch a {
   color: var(--slate-light);
-  padding: 2px 6px;
+  padding: 2px 4px;
   font-weight: 600;
+  text-decoration: none;
 }
 .lang-switch a.lang-active { color: var(--navy); }
+
+/* ============ TOPBAR (language switch lives here) ============ */
+.topbar { background: var(--navy-deep); }
+.topbar-inner { display: flex; justify-content: flex-end; align-items: center; height: 32px; }
+.topbar .lang-switch a { color: #93A3B8; }
+.topbar .lang-switch a.lang-active { color: var(--gold-light); }
+.topbar .lang-sep { color: #4A5A70; font-size: 0.7rem; }
 
 /* ============ MOBILE NAV TOGGLE ============ */
 .nav-toggle-checkbox { display: none; }
@@ -371,11 +379,6 @@ button[type=submit]:hover { background: var(--navy-deep); }
     width: 100%;
   }
   .main-nav a:not(.btn-cta):after { display: none; }
-  .main-nav .lang-switch {
-    padding: 14px 24px;
-    border-bottom: 1px solid var(--line);
-    font-size: 0.9rem;
-  }
   .main-nav .btn-cta {
     margin: 12px 24px 4px 24px;
     text-align: center;
