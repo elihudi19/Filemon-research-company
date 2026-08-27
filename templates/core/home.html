@@ -1,21 +1,23 @@
 {% extends "base.html" %}
 {% load i18n_extras %}
-{% block title %}{{ COMPANY_NAME }} — Data-Driven Insights for Multi-Sector Impact{% endblock %}
+{% block title %}{{ COMPANY_NAME }} — {{ COMPANY_TAGLINE }}{% endblock %}
 
 {% block content %}
 <section class="hero">
   <div class="container">
-    <span class="eyebrow">{% if LANG == 'en' %}Multi-Sector Research Firm{% else %}Kampuni ya Utafiti ya Sekta Mtambuka{% endif %}</span>
-    <h1>Data-Driven Insights for Multi-Sector Impact</h1>
+    <span class="eyebrow">{{ COMPANY_TAGLINE }}</span>
+    <h1>{% if LANG == 'en' %}Insights &amp; Innovation for Multi-Sector Impact{% else %}Maarifa na Ubunifu kwa Athari za Kisekta Mbalimbali{% endif %}</h1>
     <p>
       {% if LANG == 'en' %}
-        {{ COMPANY_NAME }} delivers rigorous research across Health, Education,
-        Economics, Agriculture, and Technology — helping institutions and
-        organizations across Tanzania and the region make evidence-based decisions.
+        {{ COMPANY_NAME }} delivers research consultancy and technology-driven
+        solutions — from custom software and data analytics to GIS mapping and
+        machine learning — helping institutions and organizations across Tanzania
+        and the region make evidence-based decisions and modernize their operations.
       {% else %}
-        {{ COMPANY_NAME }} inatoa utafiti wa hali ya juu katika Afya, Elimu, Uchumi,
-        Kilimo, na Teknolojia — kuwasaidia taasisi na mashirika Tanzania na kikanda
-        kufanya maamuzi yanayoegemea data.
+        {{ COMPANY_NAME }} inatoa huduma za ushauri wa kitafiti na masuluhisho ya
+        kiteknolojia — kuanzia uundaji wa mifumo maalum na uchambuzi wa data hadi
+        ramani za GIS na akili bandia — kusaidia taasisi na mashirika Tanzania na
+        kikanda kufanya maamuzi yanayoegemea data na kuboresha uendeshaji wao.
       {% endif %}
     </p>
     <div class="hero-actions">
@@ -62,8 +64,32 @@
   </div>
 </section>
 
-{% if publications %}
+{% if services %}
 <section class="block section-alt">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">{% if LANG == 'en' %}What We Do{% else %}Tunachofanya{% endif %}</span>
+      <h2>{% if LANG == 'en' %}Research &amp; Technology Services{% else %}Huduma za Utafiti na Teknolojia{% endif %}</h2>
+    </div>
+    <div class="card-grid">
+      {% for service in services %}
+        <div class="card">
+          <h3>{% lfield service "title" %}</h3>
+          <p>{% lfield service "description" as service_desc %}{{ service_desc|truncatewords:22 }}</p>
+        </div>
+      {% endfor %}
+    </div>
+    <p style="margin-top:24px;">
+      <a href="{% url 'services:list' %}" class="link-secondary">
+        {% if LANG == 'en' %}View All Services &rarr;{% else %}Angalia Huduma Zote &rarr;{% endif %}
+      </a>
+    </p>
+  </div>
+</section>
+{% endif %}
+
+{% if publications %}
+<section class="block">
   <div class="container">
     <div class="section-head">
       <span class="eyebrow">{% if LANG == 'en' %}Latest Thinking{% else %}Ripoti Mpya{% endif %}</span>
@@ -85,7 +111,7 @@
 {% endif %}
 
 {% if testimonials %}
-<section class="block">
+<section class="block section-alt">
   <div class="container">
     <div class="section-head">
       <span class="eyebrow">{% if LANG == 'en' %}Client Voices{% else %}Sauti za Wateja{% endif %}</span>
