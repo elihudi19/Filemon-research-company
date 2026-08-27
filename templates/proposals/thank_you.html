@@ -1,9 +1,11 @@
 {% extends "base.html" %}
-{% block title %}Asante — {{ COMPANY_NAME }}{% endblock %}
+{% block title %}{% if LANG == 'en' %}Thank You{% else %}Asante{% endif %} — {{ COMPANY_NAME }}{% endblock %}
 {% block content %}
-<section class="container">
-  <h2 class="section-title">Asante!</h2>
-  <p>Ombi lako limepokelewa kwa mafanikio. Timu yetu itawasiliana nawe hivi karibuni.</p>
-  <a href="{% url 'core:home' %}" class="btn-primary">Rudi Nyumbani</a>
+<section class="block">
+  <div class="container">
+    <h2>{% if LANG == 'en' %}Thank You!{% else %}Asante!{% endif %}</h2>
+    <p>{% if LANG == 'en' %}Your request has been received successfully. Our team will contact you shortly.{% else %}Ombi lako limepokelewa kwa mafanikio. Timu yetu itawasiliana nawe hivi karibuni.{% endif %}</p>
+    <a href="{% url 'core:home' %}" class="btn-primary">{% if LANG == 'en' %}Back to Home{% else %}Rudi Nyumbani{% endif %}</a>
+  </div>
 </section>
 {% endblock %}
