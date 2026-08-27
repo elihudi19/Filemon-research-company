@@ -1,11 +1,15 @@
 {% extends "base.html" %}
-{% block title %}{{ publication.title_en }} — {{ COMPANY_NAME }}{% endblock %}
+{% load i18n_extras %}
+{% block title %}{% lfield publication "title" %} — {{ COMPANY_NAME }}{% endblock %}
 {% block content %}
-<section class="container">
-  <h2 class="section-title">{{ publication.title_en }}</h2>
-  <p>{{ publication.summary_en }}</p>
-  <a href="{{ publication.document.url }}" class="btn-primary" target="_blank" rel="noopener noreferrer">
-    Pakua PDF
-  </a>
+<section class="block">
+  <div class="container">
+    <span class="eyebrow">{{ publication.published_date }}</span>
+    <h2>{% lfield publication "title" %}</h2>
+    <p style="max-width:720px;">{% lfield publication "summary" %}</p>
+    <a href="{{ publication.document.url }}" class="btn-primary" target="_blank" rel="noopener noreferrer">
+      {% if LANG == 'en' %}Download PDF{% else %}Pakua PDF{% endif %}
+    </a>
+  </div>
 </section>
 {% endblock %}
