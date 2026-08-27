@@ -30,13 +30,16 @@ def job_detail(request, slug):
 def apply(request, slug):
     job = get_object_or_404(JobPosting, slug=slug, is_published=True)
     was_limited = getattr(request, "limited", False)
+    lang = getattr(request, "LANG", "en")
 
     if request.method == "POST" and was_limited:
         logger.warning("Rate limit imefikiwa kwa IP %s kwenye maombi ya kazi.", get_client_ip(request))
-        messages.error(
-            request,
-            "Umetuma maombi mengi kwa muda mfupi. Tafadhali subiri kidogo kisha ujaribu tena.",
+        error_msg = (
+            "You have submitted too many applications recently. Please wait a moment and try again."
+            if lang == "en"
+            else "Umetuma maombi mengi kwa muda mfupi. Tafadhali subiri kidogo kisha ujaribu tena."
         )
+        messages.error(request, error_msg)
         return render(request, "careers/apply.html", {"form": JobApplicationForm(), "job": job})
 
     if request.method == "POST":
@@ -64,7 +67,12 @@ def apply(request, slug):
             except Exception:
                 logger.exception("Imeshindwa kutuma barua pepe ya taarifa ya ombi la kazi.")
 
-            messages.success(request, "Asante! Ombi lako la kazi limepokelewa.")
+            success_msg = (
+                "Thank you! Your job application has been received."
+                if lang == "en"
+                else "Asante! Ombi lako la kazi limepokelewa."
+            )
+            messages.success(request, success_msg)
             return redirect("careers:thank_you")
     else:
         form = JobApplicationForm()
