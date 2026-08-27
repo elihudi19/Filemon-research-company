@@ -28,9 +28,10 @@
         {{ form.email }}
         {{ form.email.errors }}
       </p>
-      <p>
-        <label for="{{ form.phone.id_for_label }}">{% if LANG == 'en' %}Phone (Optional){% else %}Simu (Hiari){% endif %}</label>
+      <p>       
+        <label for="{{ form.phone.id_for_label }}">{% if LANG == 'en' %}Phone{% else %}Simu{% endif %}</label>
         {{ form.phone }}
+        {{ form.phone.errors }}
       </p>
       <p>
         <label for="{{ form.sector.id_for_label }}">{% if LANG == 'en' %}Relevant Sector{% else %}Sekta Husika{% endif %}</label>
