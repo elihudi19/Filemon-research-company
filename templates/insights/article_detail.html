@@ -16,7 +16,7 @@
       </div>
     {% endif %}
 
-    <div style="margin-top:20px; color:var(--ink);">{% lfield article "body" %}</div>
+    <div style="margin-top:20px; color:var(--ink);">{% lfield article "body" as body_full %}{{ body_full|linebreaks }}</div>
   </div>
 </section>
 {% endblock %}
