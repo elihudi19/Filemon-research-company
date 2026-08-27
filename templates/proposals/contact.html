@@ -1,51 +1,54 @@
 {% extends "base.html" %}
 {% load honeypot %}
-{% block title %}Omba Pendekezo — {{ COMPANY_NAME }}{% endblock %}
+{% block title %}{% if LANG == 'en' %}Request a Proposal{% else %}Omba Pendekezo{% endif %} — {{ COMPANY_NAME }}{% endblock %}
 {% block content %}
-<section class="container">
-  <h2 class="section-title">Request for Proposal (RFP)</h2>
-  <p>Jaza fomu hapa chini na timu yetu itawasiliana nawe ndani ya siku 2 za kazi.</p>
+<section class="block">
+  <div class="container">
+    <span class="eyebrow">{% if LANG == 'en' %}Get Started{% else %}Anza Sasa{% endif %}</span>
+    <h2>{% if LANG == 'en' %}Request for Proposal (RFP){% else %}Omba Pendekezo (RFP){% endif %}</h2>
+    <p>{% if LANG == 'en' %}Fill out the form below and our team will contact you within 2 business days.{% else %}Jaza fomu hapa chini na timu yetu itawasiliana nawe ndani ya siku 2 za kazi.{% endif %}</p>
 
-  <form method="post" enctype="multipart/form-data" novalidate>
-    {% csrf_token %}
-    {% render_honeypot_field %}
-    {{ form.non_field_errors }}
+    <form method="post" enctype="multipart/form-data" novalidate>
+      {% csrf_token %}
+      {% render_honeypot_field %}
+      {{ form.non_field_errors }}
 
-    <p>
-      <label for="{{ form.full_name.id_for_label }}">Jina Kamili</label>
-      {{ form.full_name }}
-      {{ form.full_name.errors }}
-    </p>
-    <p>
-      <label for="{{ form.organization.id_for_label }}">Taasisi/Shirika</label>
-      {{ form.organization }}
-      {{ form.organization.errors }}
-    </p>
-    <p>
-      <label for="{{ form.email.id_for_label }}">Barua Pepe</label>
-      {{ form.email }}
-      {{ form.email.errors }}
-    </p>
-    <p>
-      <label for="{{ form.phone.id_for_label }}">Simu (Hiari)</label>
-      {{ form.phone }}
-    </p>
-    <p>
-      <label for="{{ form.sector.id_for_label }}">Sekta Husika</label>
-      {{ form.sector }}
-    </p>
-    <p>
-      <label for="{{ form.message.id_for_label }}">Maelezo ya Ombi Lako</label>
-      {{ form.message }}
-      {{ form.message.errors }}
-    </p>
-    <p>
-      <label for="{{ form.tor_document.id_for_label }}">Pakia Terms of Reference (Hiari, PDF/DOC, upeo 5MB)</label>
-      {{ form.tor_document }}
-      {{ form.tor_document.errors }}
-    </p>
+      <p>
+        <label for="{{ form.full_name.id_for_label }}">{% if LANG == 'en' %}Full Name{% else %}Jina Kamili{% endif %}</label>
+        {{ form.full_name }}
+        {{ form.full_name.errors }}
+      </p>
+      <p>
+        <label for="{{ form.organization.id_for_label }}">{% if LANG == 'en' %}Organization{% else %}Taasisi/Shirika{% endif %}</label>
+        {{ form.organization }}
+        {{ form.organization.errors }}
+      </p>
+      <p>
+        <label for="{{ form.email.id_for_label }}">{% if LANG == 'en' %}Email{% else %}Barua Pepe{% endif %}</label>
+        {{ form.email }}
+        {{ form.email.errors }}
+      </p>
+      <p>
+        <label for="{{ form.phone.id_for_label }}">{% if LANG == 'en' %}Phone (Optional){% else %}Simu (Hiari){% endif %}</label>
+        {{ form.phone }}
+      </p>
+      <p>
+        <label for="{{ form.sector.id_for_label }}">{% if LANG == 'en' %}Relevant Sector{% else %}Sekta Husika{% endif %}</label>
+        {{ form.sector }}
+      </p>
+      <p>
+        <label for="{{ form.message.id_for_label }}">{% if LANG == 'en' %}Describe Your Request{% else %}Maelezo ya Ombi Lako{% endif %}</label>
+        {{ form.message }}
+        {{ form.message.errors }}
+      </p>
+      <p>
+        <label for="{{ form.tor_document.id_for_label }}">{% if LANG == 'en' %}Upload Terms of Reference (Optional, PDF/DOC, max 5MB){% else %}Pakia Terms of Reference (Hiari, PDF/DOC, upeo 5MB){% endif %}</label>
+        {{ form.tor_document }}
+        {{ form.tor_document.errors }}
+      </p>
 
-    <button type="submit">Tuma Ombi</button>
-  </form>
+      <button type="submit">{% if LANG == 'en' %}Submit Request{% else %}Tuma Ombi{% endif %}</button>
+    </form>
+  </div>
 </section>
 {% endblock %}
