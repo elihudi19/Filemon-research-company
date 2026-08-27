@@ -288,6 +288,21 @@ input:focus, textarea:focus, select:focus {
   border-color: var(--gold);
   box-shadow: 0 0 0 3px rgba(199,154,59,0.15);
 }
+.errorlist {
+  list-style: none;
+  margin: 6px 0 0 0;
+  padding: 0;
+}
+.errorlist li {
+  color: #C0392B;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-top: 2px;
+}
+input.is-invalid, textarea.is-invalid, select.is-invalid,
+input:user-invalid, textarea:user-invalid {
+  border-color: #C0392B;
+}
 button[type=submit] {
   background: var(--navy);
   color: #fff;
