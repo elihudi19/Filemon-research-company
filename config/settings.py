@@ -229,8 +229,8 @@ EMAIL_PORT = env.int("EMAIL_PORT", default=587)
 EMAIL_USE_TLS = env.bool("EMAIL_USE_TLS", default=True)
 EMAIL_HOST_USER = env("EMAIL_HOST_USER", default="")
 EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD", default="")
-DEFAULT_FROM_EMAIL = env("DEFAULT_FROM_EMAIL", default="no-reply@baobabinsight.com")
-PROPOSAL_NOTIFY_EMAIL = env("PROPOSAL_NOTIFY_EMAIL", default="research@baobabinsight.com")
+DEFAULT_FROM_EMAIL = env("DEFAULT_FROM_EMAIL", default="no-reply@rctisolution.com")
+PROPOSAL_NOTIFY_EMAIL = env("PROPOSAL_NOTIFY_EMAIL", default="info@rctisolution.com")
 
 # ---------------------------------------------------------------------------
 # LOGGING — muhimu kuona majaribio ya udukuzi kwenye Render logs
@@ -248,5 +248,7 @@ LOGGING = {
     },
 }
 
-COMPANY_NAME = "Baobab Insight Partners"
-COMPANY_SHORT_NAME = "Baobab Insight"
+COMPANY_NAME = "RCTI Solution"
+COMPANY_SHORT_NAME = "RCTI Solution"
+COMPANY_FULL_NAME_EN = "Research Consultancy & Technological Innovation"
+COMPANY_FULL_NAME_SW = "Ushauri wa Kitaalamu wa Utafiti na Ubunifu wa Kiteknolojia"
