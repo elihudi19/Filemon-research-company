@@ -1,31 +1,61 @@
 {% extends "base.html" %}
-{% block title %}Kuhusu Sisi — {{ COMPANY_NAME }}{% endblock %}
+{% load i18n_extras %}
+{% block title %}{% if LANG == 'en' %}About Us{% else %}Kuhusu Sisi{% endif %} — {{ COMPANY_NAME }}{% endblock %}
 {% block content %}
-<section class="container">
-  <h2 class="section-title">Kuhusu Sisi</h2>
-  <p>{{ COMPANY_NAME }} ni kampuni ya utafiti ya sekta mtambuka, iliyojikita katika kutoa
-  takwimu na uchambuzi wa hali ya juu unaowasaidia watunga sera, mashirika, na taasisi
-  kufanya maamuzi sahihi yanayoegemea data.</p>
-
-  <h3>Misingi Yetu (Core Values)</h3>
-  <div class="card-grid">
-    {% for value in core_values %}
-      <div class="card">
-        <h3>{{ value.title_en }}</h3>
-        <p>{{ value.description_en }}</p>
-      </div>
-    {% endfor %}
-  </div>
-
-  <h3>Uongozi Wetu</h3>
-  <div class="card-grid">
-    {% for member in team %}
-      <div class="card">
-        <h3>{{ member.full_name }}</h3>
-        <p><em>{{ member.role_en }}</em></p>
-        <p>{{ member.bio_en|truncatewords:25 }}</p>
-      </div>
-    {% endfor %}
+<section class="block">
+  <div class="container">
+    <span class="eyebrow">{{ COMPANY_TAGLINE }}</span>
+    <h2>{% if LANG == 'en' %}About Us{% else %}Kuhusu Sisi{% endif %}</h2>
+    <p style="max-width:720px;">
+      {% if LANG == 'en' %}
+        {{ COMPANY_NAME }} is a research consultancy and technological innovation
+        firm, dedicated to delivering high-quality data, analysis, and digital
+        solutions that help policymakers, organizations, and institutions make
+        sound, evidence-based decisions.
+      {% else %}
+        {{ COMPANY_NAME }} ni kampuni ya ushauri wa kitafiti na ubunifu wa
+        kiteknolojia, iliyojikita katika kutoa takwimu, uchambuzi, na masuluhisho
+        ya kidijitali ya hali ya juu yanayowasaidia watunga sera, mashirika, na
+        taasisi kufanya maamuzi sahihi yanayoegemea data.
+      {% endif %}
+    </p>
   </div>
 </section>
+
+<section class="block section-alt">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">{% if LANG == 'en' %}What Guides Us{% else %}Kinachotuongoza{% endif %}</span>
+      <h2>{% if LANG == 'en' %}Our Core Values{% else %}Misingi Yetu{% endif %}</h2>
+    </div>
+    <div class="card-grid">
+      {% for value in core_values %}
+        <div class="card">
+          <h3>{% lfield value "title" %}</h3>
+          <p>{% lfield value "description" %}</p>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% if team %}
+<section class="block">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">{% if LANG == 'en' %}Our People{% else %}Watu Wetu{% endif %}</span>
+      <h2>{% if LANG == 'en' %}Leadership{% else %}Uongozi Wetu{% endif %}</h2>
+    </div>
+    <div class="card-grid">
+      {% for member in team %}
+        <div class="card">
+          <h3>{{ member.full_name }}</h3>
+          <p><em>{% lfield member "role" %}</em></p>
+          <p>{% lfield member "bio" as bio_text %}{{ bio_text|truncatewords:25 }}</p>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
 {% endblock %}
