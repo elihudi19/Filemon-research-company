@@ -1,15 +1,21 @@
 {% extends "base.html" %}
-{% block title %}Sekta Zetu — {{ COMPANY_NAME }}{% endblock %}
+{% load i18n_extras %}
+{% block title %}{% if LANG == 'en' %}Sectors{% else %}Sekta{% endif %} — {{ COMPANY_NAME }}{% endblock %}
 {% block content %}
-<section class="container">
-  <h2 class="section-title">Sekta za Utafiti</h2>
-  {% for sector in sectors %}
-    <div class="sector-card">
-      <h3><a href="{{ sector.get_absolute_url }}">{{ sector.name_en }}</a></h3>
-      <p>{{ sector.summary_en|truncatewords:25 }}</p>
+<section class="block">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">{% if LANG == 'en' %}Areas of Expertise{% else %}Maeneo ya Utaalamu{% endif %}</span>
+      <h2>{% if LANG == 'en' %}Research Sectors{% else %}Sekta za Utafiti{% endif %}</h2>
     </div>
-  {% empty %}
-    <p>Hakuna sekta iliyoongezwa bado.</p>
-  {% endfor %}
+    {% for sector in sectors %}
+      <div class="sector-card">
+        <h3><a href="{{ sector.get_absolute_url }}">{% lfield sector "name" %}</a></h3>
+        <p>{% lfield sector "summary" as summary_text %}{{ summary_text|truncatewords:25 }}</p>
+      </div>
+    {% empty %}
+      <p>{% if LANG == 'en' %}No sectors have been added yet.{% else %}Hakuna sekta iliyoongezwa bado.{% endif %}</p>
+    {% endfor %}
+  </div>
 </section>
 {% endblock %}
