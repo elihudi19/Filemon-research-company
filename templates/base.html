@@ -5,15 +5,23 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{% block title %}{{ COMPANY_NAME }}{% endblock %}</title>
-<meta name="description" content="{% block description %}{{ COMPANY_NAME }} — Multi-Sector Research Firm{% endblock %}">
+<meta name="description" content="{% block description %}{{ COMPANY_NAME }} — {{ COMPANY_TAGLINE }}{% endblock %}">
 <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
 
+<div class="topbar">
+  <div class="container topbar-inner">
+    <span class="lang-switch">
+      <a href="?lang=en" class="{% if LANG == 'en' %}lang-active{% endif %}">EN</a><span class="lang-sep">/</span><a href="?lang=sw" class="{% if LANG == 'sw' %}lang-active{% endif %}">SW</a>
+    </span>
+  </div>
+</div>
+
 <header class="site-header">
   <div class="container header-inner">
     <a href="{% url 'core:home' %}" class="brand">
-      <span class="brand-mark">B</span>
+      <span class="brand-mark">R</span>
       {{ COMPANY_SHORT_NAME }}
     </a>
 
@@ -26,9 +34,6 @@
       <a href="{% url 'services:list' %}">{% if LANG == 'en' %}Services{% else %}Huduma{% endif %}</a>
       <a href="{% url 'insights:publication_list' %}">{% if LANG == 'en' %}Insights{% else %}Maktaba{% endif %}</a>
       <a href="{% url 'careers:job_list' %}">{% if LANG == 'en' %}Careers{% else %}Ajira{% endif %}</a>
-      <span class="lang-switch">
-        <a href="?lang=en" class="{% if LANG == 'en' %}lang-active{% endif %}">EN</a>/<a href="?lang=sw" class="{% if LANG == 'sw' %}lang-active{% endif %}">SW</a>
-      </span>
       <a href="{% url 'proposals:contact' %}" class="btn-cta">{% if LANG == 'en' %}Request a Proposal{% else %}Omba Pendekezo{% endif %}</a>
     </nav>
   </div>
@@ -50,7 +55,7 @@
   <div class="container footer-inner">
     <div>
       <strong>{{ COMPANY_NAME }}</strong>
-      <p>Data-Driven Insights for Multi-Sector Impact.</p>
+      <p>{{ COMPANY_TAGLINE }}</p>
       <p>Dar es Salaam, Tanzania</p>
     </div>
     <div>
@@ -63,7 +68,7 @@
     <div>
       <span class="footer-col-title">{% if LANG == 'en' %}Connect{% else %}Wasiliana{% endif %}</span>
       <a href="{% url 'proposals:contact' %}">{% if LANG == 'en' %}Request a Proposal{% else %}Omba Pendekezo{% endif %}</a>
-      <a href="mailto:research@baobabinsight.com">research@baobabinsight.com</a>
+      <a href="mailto:info@rctisolution.com">info@rctisolution.com</a>
     </div>
   </div>
   <div class="container copyright">
