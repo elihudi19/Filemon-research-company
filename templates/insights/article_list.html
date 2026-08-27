@@ -1,16 +1,26 @@
 {% extends "base.html" %}
-{% block title %}Blog &amp; Articles — {{ COMPANY_NAME }}{% endblock %}
+{% load i18n_extras %}
+{% block title %}{% if LANG == 'en' %}Blog &amp; Articles{% else %}Blog na Makala{% endif %} — {{ COMPANY_NAME }}{% endblock %}
 {% block content %}
-<section class="container">
-  <h2 class="section-title">Blog &amp; Articles</h2>
-  <div class="card-grid">
-    {% for article in articles %}
-      <div class="card">
-        <h3>{{ article.title_en }}</h3>
-        <p>{{ article.body_en|truncatewords:20 }}</p>
-        <a href="{{ article.get_absolute_url }}">Soma Zaidi &rarr;</a>
-      </div>
-    {% empty %}<p>Hakuna makala bado.</p>{% endfor %}
+<section class="block">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">{% if LANG == 'en' %}Analysis &amp; Trends{% else %}Uchambuzi na Mwelekeo{% endif %}</span>
+      <h2>{% if LANG == 'en' %}Blog &amp; Articles{% else %}Blog na Makala{% endif %}</h2>
+    </div>
+    <div class="card-grid">
+      {% for article in articles %}
+        <div class="card">
+          <h3>{% lfield article "title" %}</h3>
+          <p>{% lfield article "body" as body_text %}{{ body_text|truncatewords:20 }}</p>
+          <a href="{{ article.get_absolute_url }}">
+            {% if LANG == 'en' %}Read More &rarr;{% else %}Soma Zaidi &rarr;{% endif %}
+          </a>
+        </div>
+      {% empty %}
+        <p>{% if LANG == 'en' %}No articles yet.{% else %}Hakuna makala bado.{% endif %}</p>
+      {% endfor %}
+    </div>
   </div>
 </section>
 {% endblock %}
