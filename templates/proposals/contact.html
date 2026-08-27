@@ -1,11 +1,11 @@
 {% extends "base.html" %}
 {% load honeypot %}
-{% block title %}{% if LANG == 'en' %}Request a Proposal{% else %}Omba Pendekezo{% endif %} — {{ COMPANY_NAME }}{% endblock %}
+{% block title %}{% if LANG == 'en' %}Request a service{% else %}Omba Huduma{% endif %} — {{ COMPANY_NAME }}{% endblock %}
 {% block content %}
 <section class="block">
   <div class="container">
     <span class="eyebrow">{% if LANG == 'en' %}Get Started{% else %}Anza Sasa{% endif %}</span>
-    <h2>{% if LANG == 'en' %}Request for Proposal (RFP){% else %}Omba Pendekezo (RFP){% endif %}</h2>
+    <h2>{% if LANG == 'en' %}Request for a service{% else %}Omba Huduma{% endif %}</h2>
     <p>{% if LANG == 'en' %}Fill out the form below and our team will contact you today.{% else %}Jaza fomu hapa chini na timu yetu itawasiliana nawe leo.{% endif %}</p>
 
     <form method="post" enctype="multipart/form-data" novalidate>
