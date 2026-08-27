@@ -2,6 +2,7 @@ from django.shortcuts import render
 
 from insights.models import Publication
 from sectors.models import Sector
+from services.models import Service
 
 from .models import ClientTestimonial, CoreValue, ImpactStat, TeamMember
 
@@ -9,6 +10,7 @@ from .models import ClientTestimonial, CoreValue, ImpactStat, TeamMember
 def home(request):
     context = {
         "sectors": Sector.objects.filter(is_published=True)[:5],
+        "services": Service.objects.filter(is_published=True)[:6],
         "stats": ImpactStat.objects.all(),
         "publications": Publication.objects.filter(is_published=True)[:3],
         "testimonials": ClientTestimonial.objects.filter(is_published=True)[:6],
