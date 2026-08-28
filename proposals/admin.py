@@ -5,8 +5,8 @@ from .models import ProposalRequest
 
 @admin.register(ProposalRequest)
 class ProposalRequestAdmin(admin.ModelAdmin):
-    list_display = ("full_name", "organization", "email", "sector", "status", "created_at", "submitted_ip")
-    list_filter = ("status", "sector", "created_at")
+    list_display = ("full_name", "organization", "email", "sector", "service", "status", "created_at", "submitted_ip")
+    list_filter = ("status", "sector", "service", "created_at")
     search_fields = ("full_name", "organization", "email")
     readonly_fields = ("submitted_ip", "created_at")
     date_hierarchy = "created_at"
