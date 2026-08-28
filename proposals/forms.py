@@ -6,7 +6,7 @@ from .models import ProposalRequest
 class ProposalRequestForm(forms.ModelForm):
     class Meta:
         model = ProposalRequest
-        fields = ["full_name", "organization", "email", "phone", "sector", "message", "tor_document"]
+        fields = ["full_name", "organization", "email", "phone", "sector", "service", "message", "tor_document"]
         widgets = {
             "message": forms.Textarea(attrs={"rows": 5}),
         }
@@ -16,8 +16,10 @@ class ProposalRequestForm(forms.ModelForm):
         self.lang = lang
         if lang == "sw":
             self.fields["sector"].label_from_instance = lambda obj: obj.name_sw
+            self.fields["service"].label_from_instance = lambda obj: obj.title_sw
         else:
             self.fields["sector"].label_from_instance = lambda obj: obj.name_en
+            self.fields["service"].label_from_instance = lambda obj: obj.title_en
 
     def clean_message(self):
         message = self.cleaned_data["message"].strip()
