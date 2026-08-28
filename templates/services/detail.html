@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load i18n_extras %}
+{% block title %}{% lfield service "title" %} — {{ COMPANY_NAME }}{% endblock %}
+{% block content %}
+<section class="block">
+  <div class="container">
+    <span class="eyebrow">{% if LANG == 'en' %}Service{% else %}Huduma{% endif %}</span>
+    <h2>{% lfield service "title" %}</h2>
+    <div style="max-width:720px; color:var(--slate);">{% lfield service "description" as service_desc %}{{ service_desc|linebreaks }}</div>
+    <a href="{% url 'proposals:contact' %}" class="btn-primary">
+      {% if LANG == 'en' %}Request a Proposal for This Service{% else %}Omba Pendekezo kwa Huduma Hii{% endif %}
+    </a>
+  </div>
+</section>
+{% endblock %}
