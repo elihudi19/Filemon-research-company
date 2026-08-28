@@ -6,7 +6,7 @@
   <div class="container">
     <span class="eyebrow">{% if LANG == 'en' %}Sector{% else %}Sekta{% endif %}</span>
     <h2>{% lfield sector "name" %}</h2>
-    <p style="max-width:720px;">{% lfield sector "summary" %}</p>
+    <div style="max-width:720px; color:var(--slate);">{% lfield sector "summary" as sector_summary %}{{ sector_summary|linebreaks }}</div>
     <a href="{% url 'proposals:contact' %}" class="btn-primary">
       {% if LANG == 'en' %}Request a Proposal for This Sector{% else %}Omba Pendekezo kwa Sekta Hii{% endif %}
     </a>
