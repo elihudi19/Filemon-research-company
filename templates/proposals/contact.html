@@ -38,6 +38,10 @@
         {{ form.sector }}
       </p>
       <p>
+        <label for="{{ form.service.id_for_label }}">{% if LANG == 'en' %}Service Needed{% else %}Huduma Unayohitaji{% endif %}</label>
+        {{ form.service }}
+      </p>
+      <p>
         <label for="{{ form.message.id_for_label }}">{% if LANG == 'en' %}Describe Your Request{% else %}Maelezo ya Ombi Lako{% endif %}</label>
         {{ form.message }}
         {{ form.message.errors }}
