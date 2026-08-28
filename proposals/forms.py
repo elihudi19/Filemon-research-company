@@ -14,12 +14,20 @@ class ProposalRequestForm(forms.ModelForm):
     def __init__(self, *args, lang="en", **kwargs):
         super().__init__(*args, **kwargs)
         self.lang = lang
+
+        self.fields["sector"].required = True
+        self.fields["service"].required = True
+
         if lang == "sw":
             self.fields["sector"].label_from_instance = lambda obj: obj.name_sw
             self.fields["service"].label_from_instance = lambda obj: obj.title_sw
+            self.fields["sector"].error_messages["required"] = "Tafadhali chagua sekta husika."
+            self.fields["service"].error_messages["required"] = "Tafadhali chagua huduma unayohitaji."
         else:
             self.fields["sector"].label_from_instance = lambda obj: obj.name_en
             self.fields["service"].label_from_instance = lambda obj: obj.title_en
+            self.fields["sector"].error_messages["required"] = "Please select a relevant sector."
+            self.fields["service"].error_messages["required"] = "Please select a service."
 
     def clean_message(self):
         message = self.cleaned_data["message"].strip()
