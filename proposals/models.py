@@ -2,6 +2,7 @@ from django.db import models
 
 from core.validators import validate_document_file
 from sectors.models import Sector
+from services.models import Service
 
 
 class ProposalRequest(models.Model):
@@ -19,6 +20,9 @@ class ProposalRequest(models.Model):
     email = models.EmailField()
     phone = models.CharField(max_length=30)
     sector = models.ForeignKey(Sector, on_delete=models.SET_NULL, null=True, blank=True)
+    service = models.ForeignKey(
+        Service, on_delete=models.SET_NULL, null=True, blank=True, related_name="proposal_requests"
+    )
     message = models.TextField()
     tor_document = models.FileField(
         upload_to="proposals/tor/",
