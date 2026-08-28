@@ -1,12 +1,12 @@
 {% extends "base.html" %}
 {% load honeypot %}
-{% block title %}{% if LANG == 'en' %}Request a service{% else %}Omba Huduma{% endif %} — {{ COMPANY_NAME }}{% endblock %}
+{% block title %}{% if LANG == 'en' %}Request a Proposal{% else %}Omba Pendekezo{% endif %} — {{ COMPANY_NAME }}{% endblock %}
 {% block content %}
 <section class="block">
   <div class="container">
     <span class="eyebrow">{% if LANG == 'en' %}Get Started{% else %}Anza Sasa{% endif %}</span>
-    <h2>{% if LANG == 'en' %}Request for a service{% else %}Omba Huduma{% endif %}</h2>
-    <p>{% if LANG == 'en' %}Fill out the form below and our team will contact you today.{% else %}Jaza fomu hapa chini na timu yetu itawasiliana nawe leo.{% endif %}</p>
+    <h2>{% if LANG == 'en' %}Request for Proposal (RFP){% else %}Omba Pendekezo (RFP){% endif %}</h2>
+    <p>{% if LANG == 'en' %}Fill out the form below and our team will contact you within 2 business days.{% else %}Jaza fomu hapa chini na timu yetu itawasiliana nawe ndani ya siku 2 za kazi.{% endif %}</p>
 
     <form method="post" enctype="multipart/form-data" novalidate>
       {% csrf_token %}
@@ -28,7 +28,7 @@
         {{ form.email }}
         {{ form.email.errors }}
       </p>
-      <p>       
+      <p>
         <label for="{{ form.phone.id_for_label }}">{% if LANG == 'en' %}Phone{% else %}Simu{% endif %}</label>
         {{ form.phone }}
         {{ form.phone.errors }}
@@ -36,10 +36,12 @@
       <p>
         <label for="{{ form.sector.id_for_label }}">{% if LANG == 'en' %}Relevant Sector{% else %}Sekta Husika{% endif %}</label>
         {{ form.sector }}
+        {{ form.sector.errors }}
       </p>
       <p>
         <label for="{{ form.service.id_for_label }}">{% if LANG == 'en' %}Service Needed{% else %}Huduma Unayohitaji{% endif %}</label>
         {{ form.service }}
+        {{ form.service.errors }}
       </p>
       <p>
         <label for="{{ form.message.id_for_label }}">{% if LANG == 'en' %}Describe Your Request{% else %}Maelezo ya Ombi Lako{% endif %}</label>
