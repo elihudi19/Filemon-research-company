@@ -23,8 +23,11 @@
     <div class="card-grid">
       {% for service in services %}
         <div class="card">
-          <h3>{% lfield service "title" %}</h3>
-          <div>{% lfield service "description" as service_desc %}{{ service_desc|linebreaks }}</div>
+          <h3><a href="{{ service.get_absolute_url }}" style="color:var(--navy); text-decoration:none;">{% lfield service "title" %}</a></h3>
+          <p>{% lfield service "description" as service_desc %}{{ service_desc|truncatewords:25 }}</p>
+          <a href="{{ service.get_absolute_url }}">
+            {% if LANG == 'en' %}Read More &rarr;{% else %}Soma Zaidi &rarr;{% endif %}
+          </a>
         </div>
       {% empty %}
         <p>{% if LANG == 'en' %}No services have been added yet.{% else %}Hakuna huduma iliyoongezwa bado.{% endif %}</p>
