@@ -43,7 +43,9 @@ INSTALLED_APPS = [
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
+    "cloudinary_storage",
     "django.contrib.staticfiles",
+    "cloudinary",
     "django.contrib.sitemaps",
 
     # Usalama wa ziada
@@ -155,6 +157,21 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 MEDIA_URL = "media/"
 MEDIA_ROOT = BASE_DIR / "media"
+
+# ---------------------------------------------------------------------------
+# CLOUDINARY — hifadhi ya kudumu ya faili (CV, ToR, picha) isiyofutika kila
+# deploy. Inatumika TU ikiwa credentials zimewekwa kwenye Environment
+# Variables. Bila hizo, mfumo unaendelea kutumia disk ya kawaida (kwa
+# maendeleo ya ndani/majaribio).
+# ---------------------------------------------------------------------------
+CLOUDINARY_CLOUD_NAME = env("CLOUDINARY_CLOUD_NAME", default="")
+if CLOUDINARY_CLOUD_NAME:
+    CLOUDINARY_STORAGE = {
+        "CLOUD_NAME": CLOUDINARY_CLOUD_NAME,
+        "API_KEY": env("CLOUDINARY_API_KEY", default=""),
+        "API_SECRET": env("CLOUDINARY_API_SECRET", default=""),
+    }
+    DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.MediaCloudinaryStorage"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
