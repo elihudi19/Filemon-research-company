@@ -4,14 +4,30 @@ from django.utils.text import slugify
 
 def cleanup_partial_state(apps, schema_editor):
     """
-    Usafishaji wa kinga: ikiwa jaribio la awali la migration hii lilishindwa
-    likaacha mabaki ya column/index ya 'slug' kwenye PostgreSQL (kwa mfano kwa
-    sababu ya connection pooling isiyohifadhi transaction), tunaifuta kwanza
-    kabla ya kuiongeza upya. Ni salama kuendesha hata kama hakuna mabaki
-    (IF EXISTS), na haiathiri SQLite (dev pekee).
+    Usafishaji wa kinga: PostgreSQL ya Render inatumia connection pooling
+    ambayo wakati mwingine inavuruga mpangilio wa transaction ya migration,
+    ikiacha index/column za 'slug' nusu-nusu kutoka jaribio lililoshindwa
+    awali. Tunatafuta na kufuta INDEX YOYOTE yenye jina linaloanza na
+    'services_service_slug' (bila kubashiri jina kamili lenye hash), kisha
+    tunafuta column yenyewe. Salama kuendesha hata kama hakuna mabaki.
     """
     if schema_editor.connection.vendor == "postgresql":
         with schema_editor.connection.cursor() as cursor:
+            cursor.execute(
+                """
+                DO $$
+                DECLARE r RECORD;
+                BEGIN
+                    FOR r IN
+                        SELECT indexname FROM pg_indexes
+                        WHERE tablename = 'services_service'
+                        AND indexname LIKE 'services_service_slug%%'
+                    LOOP
+                        EXECUTE 'DROP INDEX IF EXISTS ' || quote_ident(r.indexname) || ' CASCADE';
+                    END LOOP;
+                END $$;
+                """
+            )
             cursor.execute("ALTER TABLE services_service DROP COLUMN IF EXISTS slug CASCADE;")
 
 
@@ -40,6 +56,8 @@ def reverse_noop(apps, schema_editor):
 
 class Migration(migrations.Migration):
 
+    atomic = False
+
     dependencies = [
         ("services", "0002_seed_rcti_services"),
     ]
@@ -49,7 +67,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name="service",
             name="slug",
-            field=models.SlugField(max_length=255, blank=True, null=True, unique=False),
+            field=models.SlugField(max_length=255, blank=True, null=True, unique=False, db_index=False),
         ),
         migrations.RunPython(populate_slugs, reverse_noop),
         migrations.AlterField(
