@@ -22,7 +22,7 @@
     </p>
     <div class="hero-actions">
       <a href="{% url 'proposals:contact' %}" class="btn-primary">
-        {% if LANG == 'en' %}Request a Service{% else %}Omba Huduma{% endif %}
+        {% if LANG == 'en' %}Request a Proposal{% else %}Omba Pendekezo{% endif %}
       </a>
       <a href="{% url 'core:methodology' %}" class="link-secondary">
         {% if LANG == 'en' %}Our Methodology &rarr;{% else %}Mbinu Zetu &rarr;{% endif %}
@@ -53,9 +53,9 @@
     <div class="card-grid">
       {% for sector in sectors %}
         <div class="card">
-          <h3>{% lfield service "title" %}</h3>
-          <p>{% lfield service "description" as service_desc %}{{ service_desc|truncatewords:22 }}</p>
-          <a href="{{ service.get_absolute_url }}">
+          <h3>{% lfield sector "name" %}</h3>
+          <p>{% lfield sector "summary" %}</p>
+          <a href="{{ sector.get_absolute_url }}">
             {% if LANG == 'en' %}Read More &rarr;{% else %}Soma Zaidi &rarr;{% endif %}
           </a>
         </div>
@@ -76,6 +76,9 @@
         <div class="card">
           <h3>{% lfield service "title" %}</h3>
           <p>{% lfield service "description" as service_desc %}{{ service_desc|truncatewords:22 }}</p>
+          <a href="{{ service.get_absolute_url }}">
+            {% if LANG == 'en' %}Read More &rarr;{% else %}Soma Zaidi &rarr;{% endif %}
+          </a>
         </div>
       {% endfor %}
     </div>
