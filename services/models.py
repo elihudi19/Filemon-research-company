@@ -5,7 +5,7 @@ from django.urls import reverse
 class Service(models.Model):
     title_en = models.CharField(max_length=150)
     title_sw = models.CharField(max_length=150)
-    slug = models.SlugField(unique=True, blank=True)
+    slug = models.SlugField(max_length=255, unique=True, blank=True)
     description_en = models.TextField()
     description_sw = models.TextField()
     icon = models.CharField(max_length=50, default="clipboard")
