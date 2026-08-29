@@ -31,12 +31,12 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name="service",
             name="slug",
-            field=models.SlugField(blank=True, null=True, unique=False),
+            field=models.SlugField(max_length=255, blank=True, null=True, unique=False),
         ),
         migrations.RunPython(populate_slugs, reverse_noop),
         migrations.AlterField(
             model_name="service",
             name="slug",
-            field=models.SlugField(blank=True, unique=True),
+            field=models.SlugField(max_length=255, blank=True, unique=True),
         ),
     ]
