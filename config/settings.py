@@ -215,10 +215,12 @@ CSP_FORM_ACTION = ["'self'"]
 # ---------------------------------------------------------------------------
 # UPLOAD LIMITS — kuzuia faili hatarishi (RFP/ToR documents)
 # ---------------------------------------------------------------------------
-DATA_UPLOAD_MAX_MEMORY_SIZE = 5 * 1024 * 1024      # 5MB kwa fomu
-FILE_UPLOAD_MAX_MEMORY_SIZE = 5 * 1024 * 1024
+DATA_UPLOAD_MAX_MEMORY_SIZE = 60 * 1024 * 1024     # 60MB (inaruhusu video za admin)
+FILE_UPLOAD_MAX_MEMORY_SIZE = 60 * 1024 * 1024
 ALLOWED_UPLOAD_EXTENSIONS = [".pdf", ".doc", ".docx"]
-MAX_UPLOAD_SIZE_BYTES = 5 * 1024 * 1024            # 5MB kwa faili moja
+MAX_UPLOAD_SIZE_BYTES = 5 * 1024 * 1024            # 5MB kwa faili moja (CV/ToR/Documents)
+ALLOWED_VIDEO_EXTENSIONS = [".mp4", ".mov", ".webm"]
+MAX_VIDEO_SIZE_BYTES = 50 * 1024 * 1024            # 50MB kwa video moja            # 5MB kwa faili moja
 
 # ---------------------------------------------------------------------------
 # RATE LIMITING (django-ratelimit) — tumika kwenye views za fomu
