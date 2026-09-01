@@ -1,7 +1,7 @@
 from django.db import models
 from django.urls import reverse
 
-from core.validators import validate_document_file
+from core.validators import validate_document_file, validate_video_file
 
 
 class Publication(models.Model):
@@ -38,9 +38,16 @@ class Article(models.Model):
     body_en = models.TextField()
     body_sw = models.TextField()
     cover_image = models.ImageField(upload_to="articles/", blank=True, null=True)
-    video_url = models.URLField(
+        video_url = models.URLField(
         blank=True,
         help_text="Bandika link ya YouTube au Vimeo (hiari). Mfano: https://www.youtube.com/watch?v=XXXXXXXXXXX",
+    )
+    video_file = models.FileField(
+        upload_to="articles/videos/",
+        blank=True,
+        null=True,
+        validators=[validate_video_file],
+        help_text="AU pakia video moja kwa moja (hiari, MP4/MOV/WEBM, upeo 50MB). Kama zote mbili zimejazwa, link ya YouTube/Vimeo itatumika kwanza.",
     )
     author_name = models.CharField(max_length=150)
     published_date = models.DateField()
