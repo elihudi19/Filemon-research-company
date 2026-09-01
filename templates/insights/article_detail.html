@@ -14,6 +14,11 @@
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowfullscreen></iframe>
       </div>
+    {% elif article.video_file %}
+      <video controls style="width:100%; border-radius:2px; margin:24px 0;">
+        <source src="{{ article.video_file.url }}">
+        {% if LANG == 'en' %}Your browser does not support video playback.{% else %}Kivinjari chako hakiwezi kucheza video.{% endif %}
+      </video>
     {% endif %}
 
     <div style="margin-top:20px; color:var(--ink);">{% lfield article "body" as body_full %}{{ body_full|linebreaks }}</div>
